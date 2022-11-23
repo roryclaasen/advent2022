@@ -2,7 +2,7 @@
 
     <PropertyGroup Label="Shared Property Group">
         <IsAdventSolution>$(MSBuildProjectName.StartsWith('Day'))</IsAdventSolution>
-        
+
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
 
@@ -17,6 +17,8 @@
     </PropertyGroup>
 
     <ItemGroup Label="Solution Item Group" Condition="$(IsAdventSolution)">
+        <PackageReference Include="Kurukuru" Version="1.4.2" />
+
         <ProjectReference Include="$(SolutionDir)Advent2022.Shared\Advent2022.Shared.csproj" />
     </ItemGroup>
 
