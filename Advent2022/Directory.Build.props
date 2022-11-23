@@ -7,4 +7,9 @@
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
         <IsPublishable>false</IsPublishable>
     </PropertyGroup>
+
+    <PropertyGroup>
+        <KurukuruVersion>1.4.2</KurukuruVersion>
+    </PropertyGroup>
+
 </Project>
