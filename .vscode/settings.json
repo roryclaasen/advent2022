@@ -1,0 +1,13 @@
+{
+  "omnisharp.useModernNet": false,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.vs": true,
+    "**/obj": true
+  },
+  "search.exclude": {
+    "**/.git": true,
+    "**/.vs": true,
+    "**/obj": true
+  },
+}
