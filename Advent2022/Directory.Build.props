@@ -1,0 +1,23 @@
+<Project>
+
+    <PropertyGroup Label="Shared Property Group">
+        <IsAdventSolution>$(MSBuildProjectName.StartsWith('Day'))</IsAdventSolution>
+        
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <IsPublishable>$(IsAdventSolution)</IsPublishable>
+
+    </PropertyGroup>
+
+    <PropertyGroup Label="Solution Property Group" Condition="$(IsAdventSolution)">
+        <RootNamespace>Advent2022.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+        <AssemblyName>Advent2022.$(MSBuildProjectName)</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup Label="Solution Item Group" Condition="$(IsAdventSolution)">
+        <ProjectReference Include="$(SolutionDir)Advent2022.Shared\Advent2022.Shared.csproj" />
+    </ItemGroup>
+
+</Project>
