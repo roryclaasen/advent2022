@@ -1,15 +1,10 @@
 <Project>
 
     <PropertyGroup>
-        <IsAdventSolution>$(MSBuildProjectName.StartsWith('Day'))</IsAdventSolution>
-
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
 
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
-        <IsPublishable>$(IsAdventSolution)</IsPublishable>
-
+        <IsPublishable>false</IsPublishable>
     </PropertyGroup>
-
-    <Import Condition="$(IsAdventSolution)" Project="$(SolutionDir)AdventSolution.Build.props" />
 </Project>

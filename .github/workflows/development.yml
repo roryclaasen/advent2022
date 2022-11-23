@@ -33,5 +33,5 @@ jobs:
         run: dotnet restore ${{ env.SolutionFile }}
       - name: Build
         run: dotnet build ${{ env.SolutionFile }} --no-restore
-      - name: Test
-        run: dotnet test ${{ env.SolutionFile }} --no-build --verbosity normal
+      # - name: Test
+      #   run: dotnet test ${{ env.SolutionFile }} --no-build --verbosity normal

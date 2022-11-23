@@ -5,4 +5,6 @@
     <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
 
+  <Import Project="$(SolutionDir)AdventSolution.Build.props" />
+
 </Project>
