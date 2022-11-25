@@ -22,3 +22,7 @@ indent_style = space
 
 [*.{csproj,csproj.user}]
 indent_size = 2
+
+[*.txt]
+insert_final_newline = false
+trim_trailing_whitespace = false

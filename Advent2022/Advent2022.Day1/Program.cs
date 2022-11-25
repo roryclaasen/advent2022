@@ -1,4 +1,8 @@
+using Advent2022.Shared;
 using Kurukuru;
+
+var inputReader = new InputReader(typeof(Program).Assembly);
+var input = inputReader.ReadFile("input.txt");
 
 Spinner.Start("Part 1", spinner =>
 {
