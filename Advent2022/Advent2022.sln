@@ -5,13 +5,12 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Advent Solutions", "Advent Solutions", "{C33A831C-7F3E-4317-BCB1-3FED1FCB8D4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Advent2022.Day1", "Advent2022.Day1\Advent2022.Day1.csproj", "{5C85246A-7913-4663-B76E-DA46D1D59605}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Advent2022.Day1", "Advent2022.Day1\Advent2022.Day1.csproj", "{5C85246A-7913-4663-B76E-DA46D1D59605}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Advent2022.Shared", "Advent2022.Shared\Advent2022.Shared.csproj", "{192FA8CB-788C-4421-8ADE-97C0E090BA70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Advent2022.Shared", "Advent2022.Shared\Advent2022.Shared.csproj", "{192FA8CB-788C-4421-8ADE-97C0E090BA70}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{89E50F4C-07EE-43FD-9112-3E6B52065145}"
 	ProjectSection(SolutionItems) = preProject
-		AdventSolution.Build.props = AdventSolution.Build.props
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
