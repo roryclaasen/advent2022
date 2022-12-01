@@ -6,20 +6,14 @@ var input = ParseInput(inputReader.ReadFile("input.txt"));
 
 Spinner.Start("Part 1", spinner =>
 {
-    var elfs = input.ToArray();
-    var max = elfs[0].Calories;
-    var num = 0;
-    for (var i = 1; i < elfs.Length; i++)
+    var max = input.MaxBy(e => e.Calories);
+    if (max is null)
     {
-        var cal = elfs[i].Calories;
-        if (cal > max)
-        {
-            max = cal;
-            num = i;
-        }
+        spinner.Fail("Part 1: Unable to find max calories");
+        return;
     }
 
-    spinner.Succeed($"Part 1: {max}");
+    spinner.Succeed($"Part 1: {max.Calories}");
 });
 
 Spinner.Start("Part 2", spinner =>
