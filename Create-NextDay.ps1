@@ -49,13 +49,13 @@ var input = inputReader.ReadFile("input.txt");
 Spinner.Start("Part 1", spinner =>
 {
     Thread.Sleep(500);
-    spinner.Succeed("The answer is: 13");
+    spinner.Succeed("Part 1: 13");
 });
 
 Spinner.Start("Part 2", spinner =>
 {
     Thread.Sleep(500);
-    spinner.Fail("Something went wrong!");
+    spinner.Fail("Part 2: Something went wrong!");
 });
 "@
 

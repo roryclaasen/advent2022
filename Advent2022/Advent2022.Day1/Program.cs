@@ -7,12 +7,11 @@ var input = ParseInput(inputReader.ReadFile("input.txt"));
 Spinner.Start("Part 1", spinner =>
 {
     var elfs = input.ToArray();
-    var max = elfs[0].Calories.Sum();
+    var max = elfs[0].Calories;
     var num = 0;
     for (var i = 1; i < elfs.Length; i++)
     {
-        var elf = elfs[i];
-        var cal = elf.Calories.Sum();
+        var cal = elfs[i].Calories;
         if (cal > max)
         {
             max = cal;
@@ -20,25 +19,26 @@ Spinner.Start("Part 1", spinner =>
         }
     }
 
-    spinner.Succeed($"The answer is: {max}");
+    spinner.Succeed($"Part 1: {max}");
 });
 
 Spinner.Start("Part 2", spinner =>
 {
     var total = input
-        .Select(e => e.Calories.Sum())
+        .Select(e => e.Calories)
         .Order()
         .TakeLast(3)
         .Sum();
-    spinner.Succeed($"The answer is: {total}");
+
+    spinner.Succeed($"Part 2: {total}");
 });
 
-IEnumerable<Elf> ParseInput(string input)
+static IEnumerable<Elf> ParseInput(string input)
 {
     foreach (var section in input.Split(Environment.NewLine + Environment.NewLine))
     {
-        yield return new Elf(section.Split(Environment.NewLine).Select(int.Parse));
+        yield return new Elf(section.Split(Environment.NewLine).Select(int.Parse).Sum());
     }
 }
 
-record Elf(IEnumerable<int> Calories);
+record Elf(int Calories);
