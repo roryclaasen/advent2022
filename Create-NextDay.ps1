@@ -38,7 +38,7 @@ Set-Content -Path $ProjectFile -Value @"
 Set-Content -Path (Join-Path $ProjectOutput "Program.cs") -Value @"
 using Advent2022.Shared;
 
-var input = await await InputReader.ReadAndParse(typeof(Program).Assembly, input => input);
+var input = await await InputReader.Read(typeof(Program).Assembly);
 
 Challenge.Part1(spinner =>
 {

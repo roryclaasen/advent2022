@@ -4,17 +4,13 @@ namespace Advent2022.Shared
 
     public static class Challenge
     {
-        public static void Part1<T>(Func<Spinner, T?> solution)
-            => Part1Async(spinner => Task.FromResult(solution(spinner)));
+        public static void Part1<T>(Func<Spinner, T?> solution) => Part1(spinner => Task.FromResult(solution(spinner)));
 
-        public static Task Part1Async<T>(Func<Spinner, Task<T?>> solution)
-            => Solve(1, solution);
+        public static Task Part1<T>(Func<Spinner, Task<T?>> solution) => Solve(1, solution);
 
-        public static void Part2<T>(Func<Spinner, T?> solution)
-            => Part2Async(spinner => Task.FromResult(solution(spinner)));
+        public static void Part2<T>(Func<Spinner, T?> solution) => Part2(spinner => Task.FromResult(solution(spinner)));
 
-        public static Task Part2Async<T>(Func<Spinner, Task<T?>> solution)
-            => Solve(2, solution);
+        public static Task Part2<T>(Func<Spinner, Task<T?>> solution) => Solve(2, solution);
 
         private static Task Solve<T>(int part, Func<Spinner, Task<T?>> solution)
         {
@@ -24,13 +20,16 @@ namespace Advent2022.Shared
                    try
                    {
                        var result = await solution(spinner);
-                       if (result is null)
+                       if (!spinner.Stopped)
                        {
-                           spinner.Warn($"{prefix}: Answer returned is null");
-                       }
-                       else
-                       {
-                           spinner.Succeed($"{prefix}: {result}");
+                           if (result is null)
+                           {
+                               spinner.Warn($"{prefix}: Answer returned is null");
+                           }
+                           else
+                           {
+                               spinner.Succeed($"{prefix}: {result}");
+                           }
                        }
                    }
                    catch (Exception ex)

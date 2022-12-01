@@ -1,32 +1,51 @@
 namespace Advent2022.Shared
 {
+    using System.Collections.Concurrent;
     using System.Reflection;
     using Kurukuru;
     using Microsoft.Extensions.FileProviders;
 
     public class InputReader
     {
-        public static Task<T> ReadAndParse<T>(Assembly assembly, Func<string, T> parse, string file = "input.txt")
-            => ReadAndAsyncParse(assembly, input => Task.FromResult(parse(input)), file);
 
-        public static Task<T> ReadAndAsyncParse<T>(Assembly assembly, Func<string, Task<T>> parse, string file = "input.txt")
-            => Spinner.StartAsync("Input: Reading", async spinner =>
+        #region Static Read Methods
+
+        private static ConcurrentDictionary<Assembly, InputReader> CachedInputReaders = new();
+
+        public static Task<string> Read(Assembly assembly, string file = "input.txt")
+            => ReadAndParse(assembly, input => input, file);
+
+        public static Task<T> ReadAndParse<T>(Assembly assembly, Func<string, T> parse, string file = "input.txt")
+            => ReadAndParse(assembly, input => Task.FromResult(parse(input)), file);
+
+        public static Task<T> ReadAndParse<T>(Assembly assembly, Func<string, Task<T>> parse, string file = "input.txt")
+        {
+            var prefix = $"Input ({file})";
+            return Spinner.StartAsync($"{prefix}: Reading", async spinner =>
             {
                 try
                 {
-                    var reader = new InputReader(assembly);
-                    var input = reader.ReadFile(file);
-                    spinner.Text = "Input: Parsing";
+                    var input = CachedInputReaders
+                        .GetOrAdd(assembly, a => new InputReader(a))
+                        .ReadFile(file);
+
+                    spinner.Text = $"{prefix}: Parsing";
                     var result = await parse(input);
-                    spinner.Succeed("Input: Read and parsed");
+
+                    spinner.Succeed($"{prefix}: Processed");
                     return result;
                 }
                 catch (Exception ex)
                 {
-                    spinner.Fail($"Input: {ex.Message}");
+                    spinner.Fail($"{prefix}: {ex.Message}");
                     throw;
                 }
             });
+        }
+
+        #endregion
+
+        #region Class Implementation
 
         private readonly EmbeddedFileProvider fileProvider;
 
@@ -54,5 +73,7 @@ namespace Advent2022.Shared
 
             return fileInfo.CreateReadStream();
         }
+
+        #endregion
     }
 }
