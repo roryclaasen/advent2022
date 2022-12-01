@@ -1,31 +1,26 @@
 using Advent2022.Shared;
-using Kurukuru;
 
-var inputReader = new InputReader(typeof(Program).Assembly);
-var input = ParseInput(inputReader.ReadFile("input.txt"));
+var elves = await InputReader.ReadAndParse(typeof(Program).Assembly, ParseInput);
 
-Spinner.Start("Part 1", spinner =>
+Challenge.Part1<int?>(spinner =>
 {
-    var max = input.MaxBy(e => e.Calories);
+    var max = elves.MaxBy(e => e.Calories);
     if (max is null)
     {
         spinner.Fail("Part 1: Unable to find max calories");
-        return;
+        return null;
     }
 
-    spinner.Succeed($"Part 1: {max.Calories}");
+    return max.Calories;
 });
 
-Spinner.Start("Part 2", spinner =>
-{
-    var total = input
+Challenge.Part2(spinner =>
+    elves
         .Select(e => e.Calories)
         .Order()
         .TakeLast(3)
-        .Sum();
-
-    spinner.Succeed($"Part 2: {total}");
-});
+        .Sum()
+    );
 
 static IEnumerable<Elf> ParseInput(string input)
 {

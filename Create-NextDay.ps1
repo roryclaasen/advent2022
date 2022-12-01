@@ -29,10 +29,6 @@ Set-Content -Path $ProjectFile -Value @"
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Kurukuru" Version="`$(KurukuruVersion)" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="`$(SolutionDir)Advent2022.Shared\Advent2022.Shared.csproj" />
   </ItemGroup>
 
@@ -41,15 +37,13 @@ Set-Content -Path $ProjectFile -Value @"
 
 Set-Content -Path (Join-Path $ProjectOutput "Program.cs") -Value @"
 using Advent2022.Shared;
-using Kurukuru;
 
-var inputReader = new InputReader(typeof(Program).Assembly);
-var input = inputReader.ReadFile("input.txt");
+var input = await await InputReader.ReadAndParse(typeof(Program).Assembly, input => input);
 
-Spinner.Start("Part 1", spinner =>
+Challenge.Part1(spinner =>
 {
     Thread.Sleep(500);
-    spinner.Succeed("Part 1: 13");
+    return 13;
 });
 
 Spinner.Start("Part 2", spinner =>

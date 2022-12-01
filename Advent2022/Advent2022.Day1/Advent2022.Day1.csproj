@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Kurukuru" Version="$(KurukuruVersion)" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="*.txt" />
   </ItemGroup>
 
