@@ -1,6 +1,6 @@
 using Advent2022.Shared;
 
-var input = await InputReader.ReadAndParse(typeof(Program).Assembly, input => input.Split(Environment.NewLine)).ConfigureAwait(false);
+var input = await InputReader.ReadAndParse(typeof(Program).Assembly, input => input.Split(Environment.NewLine).Select(l => l.Split(' '))).ConfigureAwait(false);
 
 Challenge.Part1(spinner => CalculateScore(ParseInput1(input)));
 
@@ -14,24 +14,22 @@ Challenge.Part2(spinner =>
     }));
 });
 
-static IEnumerable<RPSRound> ParseInput1(IEnumerable<string> input)
+static IEnumerable<RPSRound> ParseInput1(IEnumerable<string[]> input)
 {
-    foreach (var section in input)
+    foreach (var round in input)
     {
-        var stat = section.Split(' ');
-        var opponent = stat[0] == "A" ? RPS.Rock : stat[0] == "B" ? RPS.Paper : RPS.Scissors;
-        var move = stat[1] == "X" ? RPS.Rock : stat[1] == "Y" ? RPS.Paper : RPS.Scissors;
+        var opponent = round[0] == "A" ? RPS.Rock : round[0] == "B" ? RPS.Paper : RPS.Scissors;
+        var move = round[1] == "X" ? RPS.Rock : round[1] == "Y" ? RPS.Paper : RPS.Scissors;
         yield return new RPSRound(move, opponent);
     }
 }
 
-static IEnumerable<Strategy> ParseInput2(IEnumerable<string> input)
+static IEnumerable<Strategy> ParseInput2(IEnumerable<string[]> input)
 {
-    foreach (var section in input)
+    foreach (var round in input)
     {
-        var stat = section.Split(' ');
-        var opponent = stat[0] == "A" ? RPS.Rock : stat[0] == "B" ? RPS.Paper : RPS.Scissors;
-        var move = stat[1] == "X" ? Outcome.Lose : stat[1] == "Y" ? Outcome.Draw : Outcome.Win;
+        var opponent = round[0] == "A" ? RPS.Rock : round[0] == "B" ? RPS.Paper : RPS.Scissors;
+        var move = round[1] == "X" ? Outcome.Lose : round[1] == "Y" ? Outcome.Draw : Outcome.Win;
         yield return new Strategy(move, opponent);
     }
 }
@@ -46,8 +44,7 @@ static int CalculateScore(IEnumerable<RPSRound> rounds)
         {
             Outcome.Draw => 3,
             Outcome.Win => 6,
-            Outcome.Lose => 0,
-            _ => throw new NotImplementedException()
+            _ => 0
         };
     }
 
