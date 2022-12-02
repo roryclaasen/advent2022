@@ -38,7 +38,7 @@ Set-Content -Path $ProjectFile -Value @"
 Set-Content -Path (Join-Path $ProjectOutput "Program.cs") -Value @"
 using Advent2022.Shared;
 
-var input = await await InputReader.Read(typeof(Program).Assembly);
+var input = await InputReader.Read(typeof(Program).Assembly).ConfigureAwait(false);
 
 Challenge.Part1(spinner =>
 {
@@ -46,10 +46,11 @@ Challenge.Part1(spinner =>
     return 13;
 });
 
-Spinner.Start("Part 2", spinner =>
+Challenge.Part2(spinner =>
 {
     Thread.Sleep(500);
     spinner.Fail("Part 2: Something went wrong!");
+    return string.Empty;
 });
 "@
 
