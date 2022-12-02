@@ -30,7 +30,7 @@ namespace Advent2022.Shared
                         .ReadFile(file);
 
                     spinner.Text = $"{prefix}: Parsing";
-                    var result = await parse(input);
+                    var result = await parse(input).ConfigureAwait(false);
 
                     spinner.Succeed($"{prefix}: Processed");
                     return result;
@@ -56,11 +56,9 @@ namespace Advent2022.Shared
 
         public string ReadFile(string fileName)
         {
-            using (var stream = this.GetStream(fileName))
-            using (var reader = new StreamReader(stream))
-            {
-                return reader.ReadToEnd();
-            }
+            using var stream = this.GetStream(fileName);
+            using var reader = new StreamReader(stream);
+            return reader.ReadToEnd();
         }
 
         private Stream GetStream(string fileName)

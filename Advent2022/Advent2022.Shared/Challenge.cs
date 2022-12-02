@@ -19,7 +19,7 @@ namespace Advent2022.Shared
                {
                    try
                    {
-                       var result = await solution(spinner);
+                       var result = await solution(spinner).ConfigureAwait(false);
                        if (!spinner.Stopped)
                        {
                            if (result is null)

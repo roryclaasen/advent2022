@@ -1,6 +1,6 @@
 using Advent2022.Shared;
 
-var elves = await InputReader.ReadAndParse(typeof(Program).Assembly, ParseInput);
+var elves = await InputReader.ReadAndParse(typeof(Program).Assembly, ParseInput).ConfigureAwait(false);
 
 Challenge.Part1<int?>(spinner =>
 {
