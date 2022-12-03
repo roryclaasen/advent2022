@@ -17,26 +17,10 @@ Challenge.Part2(spinner =>
     var score = 0;
     for (var i = 0; i < elves.Length; i += 3)
     {
-        var elf1 = elves[i];
-        var elf2 = elves[i + 1];
-        var elf3 = elves[i + 2];
-
-        char? shared = null;
-        foreach (var letter in elf1.Everything.Distinct())
-        {
-            if (elf2.Everything.Contains(letter) && elf3.Everything.Contains(letter))
-            {
-                shared = letter;
-                break;
-            }
-        }
-        
-        if (shared is null)
-        {
-            throw new Exception("No shared letter found");
-        }
-
-        score += Priority(shared.Value);
+        score += Priority(elves[i].Everything
+            .Distinct()
+            .Where(letter => elves[i + 1].Everything.Contains(letter) && elves[i + 2].Everything.Contains(letter))
+            .Single());
     }
 
     return score;
