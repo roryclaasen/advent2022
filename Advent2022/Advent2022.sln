@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Advent2022.Day2", "Advent2022.Day2\Advent2022.Day2.csproj", "{74612379-1B90-484C-83C4-BAE47153BFA2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Advent2022.Day3", "Advent2022.Day3\Advent2022.Day3.csproj", "{BBEB831D-62F1-4C87-B32D-ABEF32539412}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{74612379-1B90-484C-83C4-BAE47153BFA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74612379-1B90-484C-83C4-BAE47153BFA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74612379-1B90-484C-83C4-BAE47153BFA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBEB831D-62F1-4C87-B32D-ABEF32539412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBEB831D-62F1-4C87-B32D-ABEF32539412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBEB831D-62F1-4C87-B32D-ABEF32539412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBEB831D-62F1-4C87-B32D-ABEF32539412}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +47,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5C85246A-7913-4663-B76E-DA46D1D59605} = {C33A831C-7F3E-4317-BCB1-3FED1FCB8D4A}
 		{74612379-1B90-484C-83C4-BAE47153BFA2} = {C33A831C-7F3E-4317-BCB1-3FED1FCB8D4A}
+		{BBEB831D-62F1-4C87-B32D-ABEF32539412} = {C33A831C-7F3E-4317-BCB1-3FED1FCB8D4A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {44E69D32-121A-4A15-836F-2E7EE29DC0C5}
