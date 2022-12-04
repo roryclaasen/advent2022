@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Kurukuru" Version="$(KurukuruVersion)" />
+    <PackageReference Include="Kurukuru" Version="1.4.2" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="7.0.0" />
   </ItemGroup>
 
