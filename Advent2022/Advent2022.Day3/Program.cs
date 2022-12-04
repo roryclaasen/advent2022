@@ -1,6 +1,6 @@
 using Advent2022.Shared;
 
-var input = await InputReader.ReadAndParse(typeof(Program).Assembly, ParseInput).ConfigureAwait(false);
+var input = await InputReader.Read(typeof(Program).Assembly, ParseInput).ConfigureAwait(false);
 
 Challenge.Part1(spinner => input
     .Select(rucksack => rucksack.Compartment1

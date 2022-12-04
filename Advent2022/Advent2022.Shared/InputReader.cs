@@ -13,12 +13,12 @@ namespace Advent2022.Shared
         private static ConcurrentDictionary<Assembly, InputReader> CachedInputReaders = new();
 
         public static Task<string> Read(Assembly assembly, string file = "input.txt")
-            => ReadAndParse(assembly, input => input, file);
+            => Read(assembly, input => input, file);
 
-        public static Task<T> ReadAndParse<T>(Assembly assembly, Func<string, T> parse, string file = "input.txt")
-            => ReadAndParse(assembly, input => Task.FromResult(parse(input)), file);
+        public static Task<T> Read<T>(Assembly assembly, Func<string, T> parse, string file = "input.txt")
+            => Read(assembly, input => Task.FromResult(parse(input)), file);
 
-        public static Task<T> ReadAndParse<T>(Assembly assembly, Func<string, Task<T>> parse, string file = "input.txt")
+        public static Task<T> Read<T>(Assembly assembly, Func<string, Task<T>> parse, string file = "input.txt")
         {
             var prefix = $"Input ({file})";
             return Spinner.StartAsync($"{prefix}: Reading", async spinner =>

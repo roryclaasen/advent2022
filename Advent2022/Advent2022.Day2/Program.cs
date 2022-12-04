@@ -1,6 +1,6 @@
 using Advent2022.Shared;
 
-var input = await InputReader.ReadAndParse(typeof(Program).Assembly, input => input.Split(Environment.NewLine).Select(l => l.Split(' '))).ConfigureAwait(false);
+var input = await InputReader.Read(typeof(Program).Assembly, input => input.Split(Environment.NewLine).Select(l => l.Split(' '))).ConfigureAwait(false);
 
 Challenge.Part1(spinner => CalculateScore(ParseInput1(input)));
 
