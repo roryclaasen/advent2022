@@ -10,7 +10,7 @@ namespace Advent2022.Shared
 
         #region Static Read Methods
 
-        private static ConcurrentDictionary<Assembly, InputReader> CachedInputReaders = new();
+        private static readonly ConcurrentDictionary<Assembly, InputReader> CachedInputReaders = new();
 
         public static Task<string> Read(Assembly assembly, string file = "input.txt")
             => Read(assembly, input => input, file);
