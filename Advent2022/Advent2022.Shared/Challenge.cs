@@ -35,6 +35,7 @@ namespace Advent2022.Shared
                    catch (Exception ex)
                    {
                        spinner.Fail($"{prefix}: {ex.Message}");
+                       throw;
                    }
                });
         }
