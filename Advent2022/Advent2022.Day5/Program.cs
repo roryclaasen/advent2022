@@ -1,4 +1,5 @@
 using Advent2022.Shared;
+using Advent2022.Shared.Extenstions;
 using System.Text.RegularExpressions;
 
 var input = await InputReader.Read(typeof(Program).Assembly, ParseInput).ConfigureAwait(false);
@@ -45,28 +46,29 @@ static IputData ParseInput(string input)
 
 static IEnumerable<Stack<char>> ParseStack(string input)
 {
-    var converted = input
-        .Replace("] ", ",")
-        .Replace(",[", ",")
-        .Replace(" [", ",")
-        .Replace(",   ,", ",,")
-        .Replace(",       ,", ",,,")
+    static string TidyStackItem(string stack) => stack
         .Replace("[", string.Empty)
         .Replace("]", string.Empty)
-        .Replace(" ", string.Empty)
+        .Replace(" ", string.Empty);
+
+    var stackInput = input
         .Split(Environment.NewLine)
-        .Select(l => l.Split(','));
-    
-    for (var i = 0; i < converted.Last().Single().Length; i++)
+        .Select(l => l.SplitInParts(3, 1).Select(TidyStackItem));
+    var stackCount = stackInput.Last().Count();
+    var stackData = stackInput.SkipLast(1).Reverse().Select(l => l.ToArray());
+
+    for (var i = 0; i < stackCount; i++)
     {
         var stack = new Stack<char>();
-        foreach (var line in converted.SkipLast(1).Reverse())
+        foreach (var line in stackData)
         {
-            if (i < line.Length && !string.IsNullOrWhiteSpace(line[i]))
+            var character = line[i];
+            if (!string.IsNullOrWhiteSpace(character))
             {
-                stack.Push(line[i].ToCharArray().First());
+                stack.Push(character.ToCharArray().First());
             }
         }
+
         yield return stack;
     }
 }
@@ -97,6 +99,7 @@ static IEnumerable<Stack<char>> CloneStacks(IEnumerable<Stack<char>> stacks)
         {
             newStack.Push(item);
         }
+
         yield return newStack;
     }
 }
