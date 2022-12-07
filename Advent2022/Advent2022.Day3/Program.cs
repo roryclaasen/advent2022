@@ -1,8 +1,8 @@
 using Advent2022.Shared;
 
-var input = await InputReader.Read(typeof(Program).Assembly, ParseInput).ConfigureAwait(false);
+var input = await InputReader.Read(typeof(Program).Assembly, ParseInput);
 
-Challenge.Part1(spinner => input
+await Challenge.Part1(spinner => input
     .Select(rucksack => rucksack.Compartment1
         .Distinct()
         .Where(letter => rucksack.Compartment2.Contains(letter))
@@ -11,7 +11,7 @@ Challenge.Part1(spinner => input
     ).Sum()
 );
 
-Challenge.Part2(spinner =>
+await Challenge.Part2(spinner =>
 {
     var elves = input.ToArray();
     var score = 0;

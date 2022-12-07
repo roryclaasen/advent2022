@@ -1,9 +1,9 @@
 using Advent2022.Shared;
 using System.Text.RegularExpressions;
 
-var input = await InputReader.Read(typeof(Program).Assembly, ParseInput).ConfigureAwait(false);
+var input = await InputReader.Read(typeof(Program).Assembly, ParseInput);
 
-Challenge.Part1(spinner =>
+await Challenge.Part1(spinner =>
 {
     var total = 0;
 
@@ -19,7 +19,7 @@ Challenge.Part1(spinner =>
     return total;
 });
 
-Challenge.Part2(spinner =>
+await Challenge.Part2(spinner =>
 {
     var currentFree = 70000000 - input.Size;
     var neededSize = 30000000;

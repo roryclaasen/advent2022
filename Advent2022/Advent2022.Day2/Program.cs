@@ -1,10 +1,10 @@
 using Advent2022.Shared;
 
-var input = await InputReader.Read(typeof(Program).Assembly, input => input.Split(Environment.NewLine).Select(l => l.Split(' '))).ConfigureAwait(false);
+var input = await InputReader.Read(typeof(Program).Assembly, input => input.Split(Environment.NewLine).Select(l => l.Split(' ')));
 
-Challenge.Part1(spinner => CalculateScore(ParseInput1(input)));
+await Challenge.Part1(spinner => CalculateScore(ParseInput1(input)));
 
-Challenge.Part2(spinner =>
+await Challenge.Part2(spinner =>
 {
     var moves = new[] { RPS.Rock, RPS.Paper, RPS.Scissors };
     return CalculateScore(ParseInput2(input).Select(s =>

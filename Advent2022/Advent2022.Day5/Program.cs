@@ -2,9 +2,9 @@ using Advent2022.Shared;
 using Advent2022.Shared.Extenstions;
 using System.Text.RegularExpressions;
 
-var input = await InputReader.Read(typeof(Program).Assembly, ParseInput).ConfigureAwait(false);
+var input = await InputReader.Read(typeof(Program).Assembly, ParseInput);
 
-Challenge.Part1(spinner =>
+await Challenge.Part1(spinner =>
 {
     var stacks = CloneStacks(input.Stacks).ToArray();
     foreach (var (Count, From, To) in input.Instructions)
@@ -18,7 +18,7 @@ Challenge.Part1(spinner =>
     return string.Join(string.Empty, stacks.Select(s => s.First().ToString()));
 });
 
-Challenge.Part2(spinner =>
+await Challenge.Part2(spinner =>
 {
     var stacks = CloneStacks(input.Stacks).ToArray();
     foreach (var (Count, From, To) in input.Instructions)

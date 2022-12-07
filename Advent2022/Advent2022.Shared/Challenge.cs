@@ -5,11 +5,11 @@ namespace Advent2022.Shared
 
     public static class Challenge
     {
-        public static void Part1<T>(Func<Spinner, T?> solution) => Part1(spinner => Task.FromResult(solution(spinner)));
+        public static Task Part1<T>(Func<Spinner, T?> solution) => Part1(spinner => Task.FromResult(solution(spinner)));
 
         public static Task Part1<T>(Func<Spinner, Task<T?>> solution) => Solve(1, solution);
 
-        public static void Part2<T>(Func<Spinner, T?> solution) => Part2(spinner => Task.FromResult(solution(spinner)));
+        public static Task Part2<T>(Func<Spinner, T?> solution) => Part2(spinner => Task.FromResult(solution(spinner)));
 
         public static Task Part2<T>(Func<Spinner, Task<T?>> solution) => Solve(2, solution);
 

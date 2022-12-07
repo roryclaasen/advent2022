@@ -1,8 +1,8 @@
 using Advent2022.Shared;
 
-var elves = await InputReader.Read(typeof(Program).Assembly, ParseInput).ConfigureAwait(false);
+var elves = await InputReader.Read(typeof(Program).Assembly, ParseInput);
 
-Challenge.Part1<int?>(spinner =>
+await Challenge.Part1<int?>(spinner =>
 {
     var max = elves.MaxBy(e => e.Calories);
     if (max is null)
@@ -14,7 +14,7 @@ Challenge.Part1<int?>(spinner =>
     return max.Calories;
 });
 
-Challenge.Part2(spinner =>
+await Challenge.Part2(spinner =>
     elves
         .Select(e => e.Calories)
         .Order()

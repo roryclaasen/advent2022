@@ -1,8 +1,8 @@
 using Advent2022.Shared;
 
-var input = await InputReader.Read(typeof(Program).Assembly, ParseInput).ConfigureAwait(false);
+var input = await InputReader.Read(typeof(Program).Assembly, ParseInput);
 
-Challenge.Part1(spinner =>
+await Challenge.Part1(spinner =>
 {
     var count = 0;
     foreach (var (Elf1, Elf2) in input)
@@ -17,7 +17,7 @@ Challenge.Part1(spinner =>
     return count;
 });
 
-Challenge.Part2(spinner =>
+await Challenge.Part2(spinner =>
 {
     var count = 0;
     foreach (var (Elf1, Elf2) in input)
