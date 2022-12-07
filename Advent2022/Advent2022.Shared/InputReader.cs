@@ -1,6 +1,7 @@
 namespace Advent2022.Shared
 {
     using System.Collections.Concurrent;
+    using System.Diagnostics;
     using System.Reflection;
     using Kurukuru;
     using Microsoft.Extensions.FileProviders;
@@ -23,21 +24,25 @@ namespace Advent2022.Shared
             var prefix = $"Input ({file})";
             return Spinner.StartAsync($"{prefix}: Reading", async spinner =>
             {
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
                 try
                 {
                     var input = CachedInputReaders
                         .GetOrAdd(assembly, a => new InputReader(a))
                         .ReadFile(file);
 
-                    spinner.Text = $"{prefix}: Parsing";
+                    spinner.Text = $"{prefix}: ({stopwatch.ElapsedMilliseconds}ms): Parsing";
                     var result = await parse(input).ConfigureAwait(false);
 
-                    spinner.Succeed($"{prefix}: Processed");
+                    stopwatch.Stop();
+                    spinner.Succeed($"{prefix}: ({stopwatch.ElapsedMilliseconds}ms): Processed");
                     return result;
                 }
                 catch (Exception ex)
                 {
-                    spinner.Fail($"{prefix}: {ex.Message}");
+                    stopwatch.Stop();
+                    spinner.Fail($"{prefix}: ({stopwatch.ElapsedMilliseconds}ms): {ex.Message}");
                     throw;
                 }
             });

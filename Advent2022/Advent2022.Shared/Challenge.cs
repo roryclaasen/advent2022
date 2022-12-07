@@ -1,6 +1,7 @@
 namespace Advent2022.Shared
 {
     using Kurukuru;
+    using System.Diagnostics;
 
     public static class Challenge
     {
@@ -15,26 +16,30 @@ namespace Advent2022.Shared
         private static Task Solve<T>(int part, Func<Spinner, Task<T?>> solution)
         {
             var prefix = $"Part {part}";
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
             return Spinner.StartAsync($"{prefix}: Solving", async spinner =>
                {
                    try
                    {
                        var result = await solution(spinner).ConfigureAwait(false);
+                       stopwatch.Stop();
                        if (!spinner.Stopped)
                        {
                            if (result is null)
                            {
-                               spinner.Warn($"{prefix}: Answer returned is null");
+                               spinner.Warn($"{prefix}: ({stopwatch.ElapsedMilliseconds}ms): Answer returned is null");
                            }
                            else
                            {
-                               spinner.Succeed($"{prefix}: {result}");
+                               spinner.Succeed($"{prefix}: ({stopwatch.ElapsedMilliseconds}ms): {result}");
                            }
                        }
                    }
                    catch (Exception ex)
                    {
-                       spinner.Fail($"{prefix}: {ex.Message}");
+                       stopwatch.Stop();
+                       spinner.Fail($"{prefix}: ({stopwatch.ElapsedMilliseconds}ms): {ex.Message}");
                        throw;
                    }
                });
