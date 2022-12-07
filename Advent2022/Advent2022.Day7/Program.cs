@@ -7,24 +7,15 @@ Challenge.Part1(spinner =>
 {
     var total = 0;
 
-    void DirectorySize(Day7.Directory dir)
+    DirectoryIterator(input, (dir) =>
     {
         var size = dir.Size;
         if (size <= 100000)
         {
             total += size;
         }
+    });
 
-        foreach (var (_, node) in dir.Nodes)
-        {
-            if (node is Day7.Directory nodeDir)
-            {
-                DirectorySize(nodeDir);
-            }
-        }
-    }
-
-    DirectorySize(input);
     return total;
 });
 
@@ -34,26 +25,30 @@ Challenge.Part2(spinner =>
     var neededSize = 30000000;
     var possibleDirs = new List<Day7.Directory>();
 
-    void DirectoryScan(Day7.Directory dir)
+    DirectoryIterator(input, (dir) =>
     {
         var size = dir.Size;
         if (currentFree + size >= neededSize)
         {
             possibleDirs.Add(dir);
         }
+    });
 
-        foreach (var (_, node) in dir.Nodes)
+    return possibleDirs.OrderBy(d => d.Size).First().Size;
+});
+
+static void DirectoryIterator(Day7.Directory dir, Action<Day7.Directory> action)
+{
+    foreach (var (_, node) in dir.Nodes)
+    {
+        if (node is Day7.Directory nodeDir)
         {
-            if (node is Day7.Directory nodeDir)
-            {
-                DirectoryScan(nodeDir);
-            }
+            DirectoryIterator(nodeDir, action);
         }
     }
 
-    DirectoryScan(input);
-    return possibleDirs.OrderBy(d => d.Size).First().Size;
-});
+    action(dir);
+}
 
 static Day7.Directory ParseInput(string input)
 {
