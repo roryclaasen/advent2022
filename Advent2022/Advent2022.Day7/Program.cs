@@ -86,7 +86,7 @@ static Day7.Directory ParseInput(string input)
             {
                 if (currentDir is null)
                 {
-                    var node = new Day7.Directory(null, dir);
+                    var node = new Day7.Directory(null!, dir);
                     tree = node;
                     currentDir = node;
                 }
@@ -114,6 +114,11 @@ static Day7.Directory ParseInput(string input)
         }
         else if (ins == "ls")
         {
+            if (currentDir is null)
+            {
+                throw new Exception("Current directory is null");
+            }
+
             while (lines.Count > 0 && !lines.Peek().StartsWith("$"))
             {
                 var output = lines.Dequeue();
@@ -127,13 +132,14 @@ static Day7.Directory ParseInput(string input)
                 }
                 else
                 {
-                    node = new Day7.File(currentDir, second, int.Parse(first));
+                    node = new Day7.Node(currentDir, second, int.Parse(first));
                 }
 
                 if (node is null)
                 {
                     throw new Exception("Unable to parse node");
                 }
+
                 currentDir.Nodes.Add(second, node);
             }
         }
@@ -153,7 +159,7 @@ static Day7.Directory ParseInput(string input)
 
 namespace Day7
 {
-    public abstract class Node
+    public class Node
     {
         public Node Parent { get; }
 
@@ -161,19 +167,10 @@ namespace Day7
 
         public virtual int Size { get; }
 
-        public Node(Node parent, string name)
+        public Node(Node parent, string name, int size)
         {
             this.Parent = parent;
             this.Name = name;
-        }
-    }
-
-    public class File : Node
-    {
-        public override int Size { get; }
-
-        public File(Directory parent, string name, int size) : base(parent, name)
-        {
             this.Size = size;
         }
     }
@@ -184,7 +181,7 @@ namespace Day7
 
         public override int Size => this.Nodes.Values.Sum(f => f.Size);
 
-        public Directory(Directory parent, string name) : base(parent, name)
+        public Directory(Directory parent, string name) : base(parent, name, 0)
         {
         }
     }
