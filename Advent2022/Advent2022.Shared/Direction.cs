@@ -2,6 +2,9 @@ namespace Advent2022.Shared
 {
     public enum Direction
     {
-        North, East, South, West
+        Up = 'U',
+        Right = 'R',
+        Down = 'D',
+        Left = 'L'
     }
 }

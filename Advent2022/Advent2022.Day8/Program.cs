@@ -32,14 +32,14 @@ await Challenge.Part1(spinner =>
 
     for (var x = 0; x < input.Width; x++)
     {
-        visibleTrees.AddRange(VisibleTrees(x, 0, Direction.South));
-        visibleTrees.AddRange(VisibleTrees(x, input.Height - 1, Direction.North));
+        visibleTrees.AddRange(VisibleTrees(x, 0, Direction.Down));
+        visibleTrees.AddRange(VisibleTrees(x, input.Height - 1, Direction.Up));
     }
 
     for (var y = 0; y < input.Height; y++)
     {
-        visibleTrees.AddRange(VisibleTrees(0, y, Direction.East));
-        visibleTrees.AddRange(VisibleTrees(input.Width - 1, y, Direction.West));
+        visibleTrees.AddRange(VisibleTrees(0, y, Direction.Right));
+        visibleTrees.AddRange(VisibleTrees(input.Width - 1, y, Direction.Left));
     }
 
     return visibleTrees.Distinct().Count();
@@ -86,10 +86,10 @@ await Challenge.Part2(spinner =>
     {
         for (var y = inwardsOffset; y < input.Height - inwardsOffset; y++)
         {
-            var north = VisibleTrees(x, y, Direction.North);
-            var south = VisibleTrees(x, y, Direction.South);
-            var east = VisibleTrees(x, y, Direction.East);
-            var west = VisibleTrees(x, y, Direction.West);
+            var north = VisibleTrees(x, y, Direction.Up);
+            var south = VisibleTrees(x, y, Direction.Down);
+            var east = VisibleTrees(x, y, Direction.Right);
+            var west = VisibleTrees(x, y, Direction.Left);
             var score = north * south * east * west;
             scores.Add(score);
         }
@@ -123,10 +123,10 @@ List<Cell> GetInputLine(int x, int y, Direction direction)
     var results = new List<Cell>();
 
     int xStep = 0, yStep = 0;
-    if (direction == Direction.North || direction == Direction.South)
-        yStep = direction == Direction.North ? -1 : 1;
+    if (direction == Direction.Up || direction == Direction.Down)
+        yStep = direction == Direction.Up ? -1 : 1;
     else
-        xStep = direction == Direction.East ? 1 : -1;
+        xStep = direction == Direction.Right ? 1 : -1;
 
     for (var i = 0; i < Math.Max(input!.Width, input!.Height); i++)
     {
