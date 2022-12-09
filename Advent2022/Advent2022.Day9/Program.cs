@@ -88,9 +88,7 @@ static IEnumerable<Instruction> ParseInput(string input)
     foreach (var line in input.Split(Environment.NewLine))
     {
         var parts = line.Split(' ');
-        var dir = (Direction)parts[0].ToCharArray()[0];
-        var steps = int.Parse(parts[1]);
-        yield return new Instruction(dir, steps);
+        yield return new Instruction((Direction)parts[0].ToCharArray()[0], int.Parse(parts[1]));
     }
 }
 
