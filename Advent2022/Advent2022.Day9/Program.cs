@@ -39,7 +39,7 @@ static int GetTailMovements(int numberOfKnots, IEnumerable<Instruction> instruct
                 var head = knots[k - 1];
                 var tail = knots[k];
 
-                if (KnotsTouching(head, tail))
+                if (Vector2.Distance(head, tail) < 2)
                 {
                     continue;
                 }
@@ -54,22 +54,17 @@ static int GetTailMovements(int numberOfKnots, IEnumerable<Instruction> instruct
     return tailPositions.Distinct().Count();
 }
 
-static float KnotDiff(float a, float b) => a < b ? b - a : a - b;
-
-static bool KnotsTouching(Vector2 head, Vector2 tail) => (KnotDiff(head.X, tail.X) <= 1) && KnotDiff(head.Y, tail.Y) <= 1;
-
 static Vector2 MoveKnot(Vector2 head, Vector2 tail)
 {
-    var newTail = new Vector2(tail.X, tail.Y);
     if (head.X != tail.X)
     {
         if (head.X > tail.X)
         {
-            newTail += Vector2.UnitX;
+            tail += Vector2.UnitX;
         }
         else
         {
-            newTail -= Vector2.UnitX;
+            tail -= Vector2.UnitX;
         }
     }
 
@@ -77,15 +72,15 @@ static Vector2 MoveKnot(Vector2 head, Vector2 tail)
     {
         if (head.Y > tail.Y)
         {
-            newTail += Vector2.UnitY;
+            tail += Vector2.UnitY;
         }
         else
         {
-            newTail -= Vector2.UnitY;
+            tail -= Vector2.UnitY;
         }
     }
 
-    return newTail;
+    return tail;
 }
 
 static IEnumerable<Instruction> ParseInput(string input)
